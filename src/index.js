@@ -31,6 +31,9 @@ function displayTemperature(response) {
   let humidityElement = document.querySelector("#humidity");
   let windElement = document.querySelector("#wind");
   let iconTodayElement = document.querySelector("#icon-today");
+
+  celsiusTemperature = response.data.main.temp;
+
   h1.innerHTML = response.data.name;
   humidityElement.innerHTML = Math.round(response.data.main.humidity);
   windElement.innerHTML = Math.round(response.data.wind.speed);
@@ -101,24 +104,28 @@ if (minutes < 10) {
   minutes = `0${minutes}`;
 }
 
-//changes to fahrenheit & shows temp from location in showTemperature function
-function clickedFahrenheit(event) {
+//Temperature conversion Celsius and Fahrenheit
+
+function displayFahrenheit(event) {
   event.preventDefault();
-  let changeFahrenheit = document.querySelector("#fahrenheit");
-  let changeTemperature = document.querySelector("#temperature");
-  changeTemperature.innerHTML = 20; //`insert kelvin to fahrenheit formula`
+  celsiusLink.classList.remove("active");
+  fahrenheitLink.classList.add("active");
+  let fahrenheitTemperature = (celsiusTemperature * 9) / 5 + 32;
+  let temperatureElement = document.querySelector("#temperature");
+  temperatureElement.innerHTML = Math.round(fahrenheitTemperature);
 }
 
-let changeFahrenheit = document.querySelector("#fahrenheit");
-changeFahrenheit.addEventListener("click", clickedFahrenheit);
-
-//changes to celsius & shows the temp from location in showTemperature function
-function clickedCelsius(event) {
+function displayCelsius(event) {
   event.preventDefault();
-  let changeCelsius = document.querySelector("#celcius");
-  let changeTemperature = document.querySelector("#temperature");
-  changeTemperature.innerHTML = 14; //`insert formula...`
+  fahrenheitLink.classList.remove("active");
+  celsiusLink.classList.add("active");
+  let temperatureElement = document.querySelector("#temperature");
+  temperatureElement.innerHTML = Math.round(celsiusTemperature);
 }
+let celsiusTemperature = null;
 
-let changeCelsius = document.querySelector("#celsius");
-changeCelsius.addEventListener("click", clickedCelsius);
+let fahrenheitLink = document.querySelector("#fahrenheit");
+fahrenheitLink.addEventListener("click", displayFahrenheit);
+
+let celsiusLink = document.querySelector("#celsius");
+celsiusLink.addEventListener("click", displayCelsius);
