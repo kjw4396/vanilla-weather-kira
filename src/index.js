@@ -98,14 +98,16 @@ let date = now.getDate();
 let hour = `${now.getHours()}`;
 let minutes = `${now.getMinutes()}`;
 let h2 = document.querySelector("h2");
-h2.innerHTML = `${day} ${date} ${month} ${hour}:${minutes}`;
 //If statement to correctly display time below 10 minutes past.
 if (minutes < 10) {
   minutes = `0${minutes}`;
 }
+if (hour < 10) {
+  hour = `0${hour}`;
+}
+h2.innerHTML = `${day} ${date} ${month} ${hour}:${minutes}`;
 
 //Temperature conversion Celsius and Fahrenheit
-
 function displayFahrenheit(event) {
   event.preventDefault();
   celsiusLink.classList.remove("active");
