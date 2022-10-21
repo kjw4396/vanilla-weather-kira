@@ -12,7 +12,6 @@ using the OpenWeather API.
 */
 
 //Get the temperature of the city and display temperature. City displayed as h1
-
 function showTemperature(response) {
   let temperatureElement = document.querySelector("#temperature");
   temperatureElement.innerHTML = Math.round(response.data.main.temp);
@@ -28,7 +27,6 @@ function search(place) {
 //"Click" the button finds current location (lon &lat), displays City h1+ Temperature
 
 function displayTemperature(response) {
-  console.log(response.data);
   let h1 = document.querySelector("h1");
   let humidityElement = document.querySelector("#humidity");
   let windElement = document.querySelector("#wind");
@@ -73,7 +71,6 @@ let listDays = [
   "Friday",
   "Saturday",
 ];
-let day = listDays[now.getDay()];
 let listMonth = [
   "January",
   "February",
@@ -88,16 +85,17 @@ let listMonth = [
   "November",
   "December",
 ];
+let day = listDays[now.getDay()];
 let month = listMonth[now.getMonth()];
 let date = now.getDate();
 let hour = `${now.getHours()}`;
 let minutes = `${now.getMinutes()}`;
 let h2 = document.querySelector("h2");
+h2.innerHTML = `${day} ${date} ${month} ${hour}:${minutes}`;
 //If statement to correctly display time below 10 minutes past.
 if (minutes < 10) {
   minutes = `0${minutes}`;
 }
-h2.innerHTML = `${day} ${date} ${month} ${hour}:${minutes}`;
 
 //changes to fahrenheit & shows temp from location in showTemperature function
 function clickedFahrenheit(event) {
