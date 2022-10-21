@@ -26,6 +26,7 @@ function search(city) {
 //^"Click" the button finds current location (lon &lat), displays City h1+ Temperature
 
 function displayTemperature(response) {
+  console.log(response.data);
   let h1 = document.querySelector("h1");
   let humidityElement = document.querySelector("#humidity");
   let windElement = document.querySelector("#wind");
@@ -59,7 +60,6 @@ function handleSubmit(event) {
   let h1 = document.querySelector("h1");
   h1.innerHTML = searchInputElement.value;
   search(searchInputElement.value);
-  console.log(searchInputElement.value);
 }
 let form = document.querySelector("#search-form");
 form.addEventListener("submit", handleSubmit);
