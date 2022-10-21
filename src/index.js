@@ -28,8 +28,13 @@ function search(place) {
 //"Click" the button finds current location (lon &lat), displays City h1+ Temperature
 
 function displayTemperature(response) {
+  console.log(response.data);
   let h1 = document.querySelector("h1");
+  let humidityElement = document.querySelector("#humidity");
+  let windElement = document.querySelector("#wind");
   h1.innerHTML = response.data.name;
+  humidityElement.innerHTML = Math.round(response.data.main.humidity);
+  windElement.innerHTML = Math.round(response.data.wind.speed);
 }
 function getCoords(position) {
   let latitude = position.coords.latitude;
