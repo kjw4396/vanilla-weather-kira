@@ -17,17 +17,15 @@ function showTemperature(response) {
   temperatureElement.innerHTML = Math.round(response.data.main.temp);
 }
 
-function search(place) {
+function search(city) {
   let unit = `metric`;
   let apiKey = `f033b46527ccaf9538a563b259bae9ba`;
-  let city = `Lisbon`;
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=${unit}&appid=${apiKey}`;
   axios.get(apiUrl).then(showTemperature);
 }
-//"Click" the button finds current location (lon &lat), displays City h1+ Temperature
+//^"Click" the button finds current location (lon &lat), displays City h1+ Temperature
 
 function displayTemperature(response) {
-  console.log(response.data);
   let h1 = document.querySelector("h1");
   let humidityElement = document.querySelector("#humidity");
   let windElement = document.querySelector("#wind");
@@ -55,16 +53,16 @@ button.addEventListener("click", displayTemperature);
 navigator.geolocation.getCurrentPosition(getCoords);
 
 //Displays what is searched as the H1
-function displaySearchedCity(event) {
+function handleSubmit(event) {
   event.preventDefault();
-  let searchInput = document.querySelector("#search-input");
+  let searchInputElement = document.querySelector("#search-input");
   let h1 = document.querySelector("h1");
-  let city = searchInput.value;
-  h1.innerHTML = `${city}`;
-  search(city);
+  h1.innerHTML = searchInputElement.value;
+  search(searchInputElement.value);
+  console.log(searchInputElement.value);
 }
 let form = document.querySelector("#search-form");
-form.addEventListener("submit", displaySearchedCity);
+form.addEventListener("submit", handleSubmit);
 
 //display current date and time
 let now = new Date();
