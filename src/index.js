@@ -11,30 +11,24 @@ and display and the city and current temperature
 using the OpenWeather API.
 */
 
-//Get the temperature of the city and display temperature. City displayed as h1
-function showTemperature(response) {
-  let temperatureElement = document.querySelector("#temperature");
-  temperatureElement.innerHTML = Math.round(response.data.main.temp);
-}
-
 function search(city) {
   let unit = `metric`;
   let apiKey = `f033b46527ccaf9538a563b259bae9ba`;
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=${unit}&appid=${apiKey}`;
-  axios.get(apiUrl).then(showTemperature);
+  axios.get(apiUrl).then(displayTemperature);
 }
-//^"Click" the button finds current location (lon &lat), displays City h1+ Temperature
-
+//"Click" the button finds current location (lon &lat), displays City h1+ Temperature
 function displayTemperature(response) {
-  console.log(response.data);
   let h1 = document.querySelector("h1");
   let humidityElement = document.querySelector("#humidity");
   let windElement = document.querySelector("#wind");
   let iconTodayElement = document.querySelector("#icon-today");
+  let temperatureElement = document.querySelector("#temperature");
 
   celsiusTemperature = response.data.main.temp;
 
   h1.innerHTML = response.data.name;
+  temperatureElement.innerHTML = Math.round(response.data.main.temp);
   humidityElement.innerHTML = Math.round(response.data.main.humidity);
   windElement.innerHTML = Math.round(response.data.wind.speed);
   iconTodayElement.setAttribute(
@@ -42,20 +36,6 @@ function displayTemperature(response) {
     `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
   );
 }
-function getCoords(position) {
-  let latitude = position.coords.latitude;
-  let longitude = position.coords.longitude;
-  let unit = `metric`;
-  let apiKey = `f033b46527ccaf9538a563b259bae9ba`;
-  let apiEndpoint = `https://api.openweathermap.org/data/2.5/weather`;
-  let apiUrl = `${apiEndpoint}?lat=${latitude}&lon=${longitude}&units=${unit}&appid=${apiKey}`;
-  axios.get(apiUrl).then(displayTemperature);
-}
-
-let button = document.querySelector("button");
-button.addEventListener("click", displayTemperature);
-navigator.geolocation.getCurrentPosition(getCoords);
-
 //Displays what is searched as the H1
 function handleSubmit(event) {
   event.preventDefault();
@@ -131,3 +111,20 @@ fahrenheitLink.addEventListener("click", displayFahrenheit);
 
 let celsiusLink = document.querySelector("#celsius");
 celsiusLink.addEventListener("click", displayCelsius);
+
+/*
+function getCoords(position) {
+  let latitude = position.coords.latitude;
+  let longitude = position.coords.longitude;
+  let unit = `metric`;
+  let apiKey = `f033b46527ccaf9538a563b259bae9ba`;
+  let apiEndpoint = `https://api.openweathermap.org/data/2.5/weather`;
+  let apiUrl = `${apiEndpoint}?lat=${latitude}&lon=${longitude}&units=${unit}&appid=${apiKey}`;
+  axios.get(apiUrl).then(displayTemperature);
+}
+
+
+let button = document.querySelector("button");
+button.addEventListener("click", displayTemperature);
+navigator.geolocation.getCurrentPosition(getCoords);
+*/
