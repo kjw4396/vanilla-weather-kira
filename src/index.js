@@ -9,14 +9,14 @@ function displayForecast() {
   let forecastElement = document.querySelector("#forecast");
 
   let forecastHTML = `<div class="row">`;
-  let days = ["Thu", "Fri", "Sat", "Sun"];
+  let days = ["Thu", "Fri", "Sat", "Sun", "Mon"];
   days.forEach(function (day) {
     forecastHTML =
       forecastHTML +
       `
           <div class="weather-forecast" id="forecast">
             <div class="row">
-                <div class="col-sm-2">
+                <div class="col-sm">
                     <div class="forecast-temperature-max font-weight-bold">18°</div>
                     <div class="forecast-temperature-min font-weight-lighter">8°</div>
                     <img src="https://ssl.gstatic.com/onebox/weather/64/partly_cloudy.png" alt="" width="40"/>
