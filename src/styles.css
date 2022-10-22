@@ -68,9 +68,10 @@ h2 {
 .icon-today {
 }
 
-.today {
+.description {
   font-size: 0.5rem;
 }
+
 .fa-solid {
   color: rgba(97, 201, 242, 0.566);
 }

@@ -17,12 +17,13 @@ function search(city) {
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=${unit}&appid=${apiKey}`;
   axios.get(apiUrl).then(displayTemperature);
 }
-//"Click" the button finds current location (lon &lat), displays City h1+ Temperature
 function displayTemperature(response) {
+  console.log(response.data);
   let h1 = document.querySelector("h1");
   let humidityElement = document.querySelector("#humidity");
   let windElement = document.querySelector("#wind");
   let iconTodayElement = document.querySelector("#icon-today");
+  let descriptionElement = document.querySelector("#description");
   let temperatureElement = document.querySelector("#temperature");
 
   celsiusTemperature = response.data.main.temp;
@@ -31,6 +32,7 @@ function displayTemperature(response) {
   temperatureElement.innerHTML = Math.round(response.data.main.temp);
   humidityElement.innerHTML = Math.round(response.data.main.humidity);
   windElement.innerHTML = Math.round(response.data.wind.speed);
+  descriptionElement.innerHTML = response.data.weather[0].description;
   iconTodayElement.setAttribute(
     "src",
     `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
@@ -47,7 +49,7 @@ function handleSubmit(event) {
 let form = document.querySelector("#search-form");
 form.addEventListener("submit", handleSubmit);
 
-//display current date and time
+//Display current date and time
 let now = new Date();
 let listDays = [
   "Sunday",
