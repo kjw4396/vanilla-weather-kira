@@ -5,6 +5,31 @@ function search(city) {
   axios.get(apiUrl).then(displayTemperature);
 }
 
+function displayForecast() {
+  let forecastElement = document.querySelector("#forecast");
+
+  let forecastHTML = `<div class="row">`;
+  let days = ["Thu", "Fri", "Sat", "Sun"];
+  days.forEach(function (day) {
+    forecastHTML =
+      forecastHTML +
+      `
+          <div class="weather-forecast" id="forecast">
+            <div class="row">
+                <div class="col-sm-2">
+                    <div class="forecast-temperature-max font-weight-bold">18°</div>
+                    <div class="forecast-temperature-min font-weight-lighter">8°</div>
+                    <img src="https://ssl.gstatic.com/onebox/weather/64/partly_cloudy.png" alt="" width="40"/>
+                    <div class="forecast-date">${day}</div>
+                </div>
+            </div>
+        </div>`;
+  });
+
+  forecastHTML = forecastHTML + `</div>`;
+  forecastElement.innerHTML = forecastHTML;
+}
+
 function displayTemperature(response) {
   console.log(response.data);
   let h1 = document.querySelector("h1");
@@ -103,6 +128,7 @@ fahrenheitLink.addEventListener("click", displayFahrenheit);
 let celsiusLink = document.querySelector("#celsius");
 celsiusLink.addEventListener("click", displayCelsius);
 
+displayForecast();
 /*
 function getCoords(position) {
   let latitude = position.coords.latitude;
