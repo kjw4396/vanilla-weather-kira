@@ -1,22 +1,10 @@
-/*
-when a user searches for a city (example: New York), 
-it should display 
-the name of the city on the result page 
-and the current temperature of the city.
-
-Bonus point:
-Add a Current Location button. When clicking on it, it uses the Geolocation 
-API to get your GPS coordinates 
-and display and the city and current temperature 
-using the OpenWeather API.
-*/
-
 function search(city) {
   let unit = `metric`;
   let apiKey = `f033b46527ccaf9538a563b259bae9ba`;
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=${unit}&appid=${apiKey}`;
   axios.get(apiUrl).then(displayTemperature);
 }
+
 function displayTemperature(response) {
   console.log(response.data);
   let h1 = document.querySelector("h1");
@@ -84,6 +72,7 @@ let h2 = document.querySelector("h2");
 if (minutes < 10) {
   minutes = `0${minutes}`;
 }
+//If statement to correctly display time below 10 o'clock.
 if (hour < 10) {
   hour = `0${hour}`;
 }
