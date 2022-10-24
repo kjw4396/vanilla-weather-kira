@@ -134,6 +134,8 @@ if (hour < 10) {
 }
 h2.innerHTML = `${day} ${date} ${month} ${hour}:${minutes}`;
 
+search("Lisbon");
+
 /* Temperature conversion code saved for later when adding back in
 //Temperature conversion Celsius and Fahrenheit
 function displayFahrenheit(event) {
