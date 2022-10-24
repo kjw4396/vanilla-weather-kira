@@ -6,33 +6,48 @@ function search(city) {
 }
 
 function forecastFunction(coordinates) {
-  //let now = new Date();
-  //let days = now(timestamp);
   let unit = `metric`;
   let apiKey = `f033b46527ccaf9538a563b259bae9ba`;
   let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=${unit}`;
   axios.get(apiUrl).then(displayForecast);
 }
 
+function formatDays(timestamp) {
+  let forecastDate = new Date(timestamp * 1000); //dt gives long number (milliseconds since sometime, so *1000)
+  let day = forecastDate.getDay();
+  let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  return days[day];
+}
+
 function displayForecast(response) {
-  console.log(response.data.daily);
+  let forecastData = response.data.daily;
   let forecastElement = document.querySelector("#forecast");
   let forecastHTML = `<div class="row">`;
-  let days = ["Thu", "Fri", "Sat", "Sun", "Mon"];
-  days.forEach(function (day) {
-    forecastHTML =
-      forecastHTML +
-      `
+
+  forecastData.forEach(function (forecastDay, index) {
+    if (index < 5) {
+      forecastHTML =
+        forecastHTML +
+        `
           <div class="weather-forecast" id="forecast">
             <div class="row">
                 <div class="col-sm">
-                    <div class="forecast-temperature-max font-weight-bold">18°</div>
-                    <div class="forecast-temperature-min font-weight-lighter">8°</div>
-                    <img src="https://ssl.gstatic.com/onebox/weather/64/partly_cloudy.png" alt="" width="40"/>
-                    <div class="forecast-date">${day}</div>
+                    <div class="forecast-temperature-max font-weight-bold">${Math.round(
+                      forecastDay.temp.max
+                    )}°</div>
+                    <div class="forecast-temperature-min font-weight-lighter">${Math.round(
+                      forecastDay.temp.min
+                    )}°</div>
+                    <img src="http://openweathermap.org/img/wn/${
+                      forecastDay.weather[0].icon
+                    }@2x.png" alt="" width="40"/>
+                    <div class="forecast-date">${formatDays(
+                      forecastDay.dt //forecastDay.dt is "timestamp" that is sent to formatDays function
+                    )}</div>
                 </div>
             </div>
         </div>`;
+    }
   });
 
   forecastHTML = forecastHTML + `</div>`;
@@ -58,7 +73,6 @@ function displayTemperature(response) {
     "src",
     `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
   );
-  console.log(response.data);
 
   forecastFunction(response.data.coord);
 }
