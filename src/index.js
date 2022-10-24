@@ -81,6 +81,7 @@ function displayTemperature(response) {
   forecastFunction(response.data.coord);
   console.log(response.data);
 }
+
 //Displays what is searched as the H1
 function handleSubmit(event) {
   event.preventDefault();
@@ -133,6 +134,7 @@ if (hour < 10) {
 }
 h2.innerHTML = `${day} ${date} ${month} ${hour}:${minutes}`;
 
+/* Temperature conversion code saved for later when adding back in
 //Temperature conversion Celsius and Fahrenheit
 function displayFahrenheit(event) {
   event.preventDefault();
@@ -150,6 +152,7 @@ function displayCelsius(event) {
   let temperatureElement = document.querySelector("#temperature");
   temperatureElement.innerHTML = Math.round(celsiusTemperature);
 }
+
 let celsiusTemperature = null;
 
 let fahrenheitLink = document.querySelector("#fahrenheit");
@@ -157,6 +160,11 @@ fahrenheitLink.addEventListener("click", displayFahrenheit);
 
 let celsiusLink = document.querySelector("#celsius");
 celsiusLink.addEventListener("click", displayCelsius);
+*/
+
+/*
+| <a  href="#" id="fahrenheit">°F</a>  --> HTML saved for later when adding unit conversion back in
+*/
 
 /*
 function getCoords(position) {
