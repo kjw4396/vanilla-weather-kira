@@ -61,11 +61,15 @@ function displayTemperature(response) {
   let iconTodayElement = document.querySelector("#icon-today");
   let descriptionElement = document.querySelector("#description");
   let temperatureElement = document.querySelector("#temperature");
+  let todayMaxElement = document.querySelector("#today-max");
+  let todayMinElement = document.querySelector("#today-min");
 
   celsiusTemperature = response.data.main.temp;
 
   h1.innerHTML = response.data.name;
   temperatureElement.innerHTML = Math.round(response.data.main.temp);
+  todayMaxElement.innerHTML = Math.round(response.data.main.temp_max);
+  todayMinElement.innerHTML = Math.round(response.data.main.temp_min);
   humidityElement.innerHTML = Math.round(response.data.main.humidity);
   windElement.innerHTML = Math.round(response.data.wind.speed);
   descriptionElement.innerHTML = response.data.weather[0].description;
@@ -75,6 +79,7 @@ function displayTemperature(response) {
   );
 
   forecastFunction(response.data.coord);
+  console.log(response.data);
 }
 //Displays what is searched as the H1
 function handleSubmit(event) {
